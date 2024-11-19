@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Access WV Online</title>
+    <style>
+      h1 {
+        font-size: 50px;
+        color: rgb(219, 0, 58);
+      }
+      h2 {
+        font-size: 36px;
+        color: rgb(219, 0, 58);
+        font-weight: normal;
+      }
+      h4 {
+        color: rgb(120, 120, 120);
+      }
+      #container {
+        max-width: 720px;
+        margin: 0 auto;
+      }
+      .bodytext {
+        font-family: sans-serif;
+        font-size: 20px;
+        text-align: center;
+      }
+      #button {
+        font-size: 25px;
+      }
+      #groups {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: : 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container" class="bodytext">
+      <p>
+        <img src=./static/logo.PNG height="200">
+      </p>
+      <p>Out of band connection system for network elements in WV.</p>
+      <br><br>
+      <p>
+        <div id="groups">
+          {% for element in network_elements %}
+            <h4>{{ element.name }}</h4>
+          {% endfor %}
+        </div>
+      </p>
+      <br><br>
+      <p>
+        <a href="{{ url_for('log_in') }}">
+          <button id="button">Log Out</button>
+        </a>       
+      </p>
+    </div>
+  </body>
+</html>
