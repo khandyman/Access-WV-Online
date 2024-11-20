@@ -96,27 +96,33 @@ wire_centers_list = [
     },
 ]
 
+
 @app.route('/')
 def log_in():
     return render_template('log_in.html')
+
 
 @app.route('/network_elements')
 def network_elements():
     return render_template('network_elements.html',
                            network_elements=network_elements_list)
 
+
 @app.route('/wire_centers')
 def wire_centers():
     return render_template('wire_centers.html',
                            wire_centers=wire_centers_list)
 
+
 @app.route('/host_names')
 def host_names():
     return render_template('host_names.html')
 
+
 @app.route('/device_connection')
 def device_connection():
     return render_template('device_connection.html')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
