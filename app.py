@@ -1,57 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from database import retrieve_records
 
 app = Flask(__name__)
-
-network_elements_list = [
-    {
-        'id': 0,
-        'name': '7210'
-    },
-    {
-        'id': 1,
-        'name': '7450'
-    },
-    {
-        'id': 2,
-        'name': 'Actelis'
-    },
-    {
-        'id': 3,
-        'name': 'Ciena'
-    },
-    {
-        'id': 4,
-        'name': 'Cordell'
-    },
-    {
-        'id': 5,
-        'name': 'DDM'
-    },
-    {
-        'id': 6,
-        'name': 'FLM'
-    },
-    {
-        'id': 7,
-        'name': 'FT2000'
-    },
-    {
-        'id': 8,
-        'name': 'Litespan'
-    },
-    {
-        'id': 9,
-        'name': 'ME3600'
-    },
-    {
-        'id': 10,
-        'name': 'TA3000'
-    },
-    {
-        'id': 11,
-        'name': 'TM50'
-    }
-]
 
 wire_centers_list = [
     {
@@ -104,14 +54,23 @@ def log_in():
 
 @app.route('/network_elements')
 def network_elements():
+    query = "SELECT * FROM network_elements"
+    network_elements_list = retrieve_records(query)
+
     return render_template('network_elements.html',
                            network_elements=network_elements_list)
 
 
-@app.route('/wire_centers')
+@app.route('/wire_centers/<type>')
 def wire_centers():
+    query = ("SELECT DISTINCT wire_center FROM wire_centers "
+             "INNER JOIN host_names ON wire_centers.abbreviation = host_names.location " 
+             "INNER JOIN network_elements ON network_elements.name = host_names.device_type "
+             "WHERE host_names.device_type = 'Edge7210'")
+    wire_center_list = retrieve_records(query)
+
     return render_template('wire_centers.html',
-                           wire_centers=wire_centers_list)
+                           wire_centers=wire_center_list)
 
 
 @app.route('/host_names')
