@@ -1,5 +1,8 @@
+from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 from os import environ
+
+load_dotenv()
 
 MYSQL_USER = environ.get('MYSQL_USER')
 MYSQL_PASSWORD = environ.get('MYSQL_PASSWORD')

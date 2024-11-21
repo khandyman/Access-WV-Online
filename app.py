@@ -61,7 +61,7 @@ def network_elements():
                            network_elements=network_elements_list)
 
 
-@app.route('/wire_centers')
+@app.route('/wire_centers/<type>')
 def wire_centers():
     query = ("SELECT DISTINCT wire_centers.name FROM wire_centers "
              "INNER JOIN host_names ON wire_centers.abbr = host_names.location " 
