@@ -61,12 +61,12 @@ def network_elements():
                            network_elements=network_elements_list)
 
 
-@app.route('/wire_centers/<type>')
-def wire_centers():
-    query = ("SELECT DISTINCT wire_centers.name FROM wire_centers "
+@app.route('/wire_centers/<device_type>')
+def wire_centers(device_type):
+    query = (f"SELECT DISTINCT wire_centers.name FROM wire_centers "
              "INNER JOIN host_names ON wire_centers.abbr = host_names.location " 
              "INNER JOIN network_elements ON network_elements.name = host_names.type "
-             "WHERE host_names.type = 'Edge7210'")
+             f"WHERE host_names.type = '{device_type}'")
     wire_center_list = retrieve_records(query)
 
     return render_template('wire_centers.html',

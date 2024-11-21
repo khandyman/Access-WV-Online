@@ -24,11 +24,8 @@
         <div id="groups">
           {% for element in network_elements %}
             {% set device = element.name %}
-            (% set test = 'this is a test' %}
-            {% set tag_start = '<a class="p-2 btn btn-lg" href="{{ url_for('wire_centers', ' %}
-            {%  %}
-<!--            {% set url = '<a class=\"p-2 btn btn-lg\" href=\"{{ url_for(\'wire_centers\') }}">{{ device }}</a>' %}-->
-            <a class="p-2 btn btn-lg" href="{{ url_for('wire_centers') }}">{{ element.name }}</a>
+<!--            {% set url = '<a class="p-2 btn btn-lg" href = "wire_centers/' + device + '">' + device + '</a>' %}-->
+            <a class="p-2 btn btn-lg" href="wire_centers/{{device}}">{{ device }}</a>
           {% endfor %}
         </div>
       </p>
