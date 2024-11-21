@@ -1,6 +1,12 @@
 from sqlalchemy import create_engine, text
+from os import environ
 
-params = "mysql+pymysql://tsw581:test_pass123@127.0.0.1/access_wv_online?charset=utf8mb4"
+MYSQL_USER = environ.get('MYSQL_USER')
+MYSQL_PASSWORD = environ.get('MYSQL_PASSWORD')
+MYSQL_HOST = environ.get('MYSQL_HOST')
+MYSQL_DB = environ.get('MYSQL_DB')
+
+params = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}/{MYSQL_DB}?charset=utf8mb4"
 engine = create_engine(params)
 
 
