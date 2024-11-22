@@ -16,13 +16,16 @@
   <body>
     <div class="container, mx-auto p-2, text-center", style=width:800px>
       <p>
-        <img class="img-fluid" src=./static/logo.PNG height="200">
+        <img class="img-fluid" src="{{ url_for('static', filename='logo.PNG') }}" height="200">
       </p>
       <p class="lead" style=font-weight:bold>Out of band connection system for network elements in WV.</p>
       <p>
         <div id="groups">
-          {% for office in wire_centers %}
-            <a class="p-2 btn btn-lg" href="host_names">{{ office.name }}</a>
+          {% for item in wire_centers %}
+            {% set wire_center = item.name %}
+            <a class="p-2 btn btn-lg"
+               href="{{ url_for('host_names', network_element=network_element, wire_center=wire_center) }}">
+              {{ wire_center }}</a>
           {% endfor %}
         </div>
       </p>
