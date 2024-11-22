@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Access WV Online - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+      #groups {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: : 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-danger">
+      <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active" aria-current="page" href="#">Home</a>
+        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </div>
+    </div>
+  </div>
+    </nav>
+    <div class="container, mx-auto p-2, text-center", style=width:800px>
+      <p>
+        <img class="img-fluid" src="{{ url_for('static', filename='logo.PNG') }}">
+      </p>
+      <p class="lead" style=font-weight:bold>Out of band connection system for network elements in WV.</p>
+      <br><br>
+      <div class="p-3">
+        <p class="lead">Filter by...</p>
+        <div id="groups">
+          <a class="d-grid gap-2 col-6 mx-auto btn btn-danger"
+             href="{{ url_for('network_elements', wire_center='none') }}">Network Elements</a>
+          <a class="d-grid gap-2 col-6 mx-auto btn btn-danger"
+             href="{{ url_for('wire_centers', network_element='none') }}">Wire Centers</a>
+        </div>
+      </div>
+      <div class="p-3">
+        <p class="lead p-2">Or enter search string...</p>
+        <input type="text" class="form-control text-center lead">
+        <a class="mt-4 d-grid gap-2 col-6 mx-auto btn btn-danger"
+             href="{{ url_for('log_in') }}">Search</a>
+      </div>
+    </div>
+  </body>
+</html>

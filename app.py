@@ -9,20 +9,51 @@ def log_in():
     return render_template('log_in.html')
 
 
-@app.route('/network_elements')
-def network_elements():
-    query = "SELECT * FROM network_elements"
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
+# @app.route('/network_elements')
+# def network_elements():
+#     query = "SELECT * FROM network_elements"
+#     network_elements_list = retrieve_records(query)
+#
+#     return render_template('network_elements.html', network_elements=network_elements_list)
+
+
+@app.route('/network_elements/<wire_center>')
+def network_elements(wire_center):
+    if wire_center == 'none':
+        query = f"SELECT network_elements.name FROM network_elements"
+    else:
+        query = (f"SELECT DISTINCT network_elements.name FROM network_elements "
+                "INNER JOIN host_names ON network_elements.name = host_names.type " 
+                "INNER JOIN wire_centers ON host_names.location = wire_centers.abbr "
+                f"WHERE wire_centers.name = '{wire_center}' ORDER BY network_elements.name ")
+
     network_elements_list = retrieve_records(query)
 
-    return render_template('network_elements.html', network_elements=network_elements_list)
+    return render_template('network_elements.html',
+                           wire_center=wire_center, network_elements=network_elements_list)
+
+
+# @app.route('/wire_centers')
+# def wire_centers():
+#     query = "SELECT * FROM wire_centers"
+#     wire_centers_list = retrieve_records(query)
+#
+#     return render_template('wire_centers.html', wire_centers=wire_centers_list)
 
 
 @app.route('/wire_centers/<network_element>')
 def wire_centers(network_element):
-    query = (f"SELECT DISTINCT wire_centers.name FROM wire_centers "
-             "INNER JOIN host_names ON wire_centers.abbr = host_names.location "
-             "INNER JOIN network_elements ON network_elements.name = host_names.type "
-             f"WHERE host_names.type = '{network_element}' ORDER BY wire_centers.name")
+    if network_element == 'none':
+        query = f"SELECT wire_centers.name FROM wire_centers"
+    else:
+        query = (f"SELECT DISTINCT wire_centers.name FROM wire_centers "
+                 "INNER JOIN host_names ON wire_centers.abbr = host_names.location "
+                 "INNER JOIN network_elements ON host_names.type = network_elements.name "
+                 f"WHERE host_names.type = '{network_element}' ORDER BY wire_centers.name")
     wire_center_list = retrieve_records(query)
 
     return render_template('wire_centers.html',
