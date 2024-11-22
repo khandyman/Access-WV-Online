@@ -66,7 +66,7 @@ def wire_centers(device_type):
     query = (f"SELECT DISTINCT wire_centers.name FROM wire_centers "
              "INNER JOIN host_names ON wire_centers.abbr = host_names.location " 
              "INNER JOIN network_elements ON network_elements.name = host_names.type "
-             f"WHERE host_names.type = '{device_type}'")
+             f"WHERE host_names.type = '{device_type}' ORDER BY wire_centers.name")
     wire_center_list = retrieve_records(query)
 
     return render_template('wire_centers.html',
