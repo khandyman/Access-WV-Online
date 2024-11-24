@@ -86,23 +86,39 @@ def wire_centers(network_element):
                            network_element=network_element, wire_centers=wire_center_list)
 
 
-@app.route('/host_names/<network_element>/<wire_center>', methods =["GET", "POST"])
+@app.route('/host_names/<network_element>/<wire_center>')
 def host_names(network_element, wire_center):
-    print(network_element)
-    if network_element == wire_center:
-        search_string = network_element
-
-        query = f"SELECT clli FROM host_names WHERE clli LIKE '%{search_string}%'"
-    else:
-        query = (f"SELECT host_names.clli FROM host_names " 
-                 "INNER JOIN wire_centers ON wire_centers.abbr = host_names.location " 
-                 f"WHERE host_names.type = '{network_element}' AND wire_centers.name = '{wire_center}'"
-                 "ORDER BY host_names.clli")
+    query = (f"SELECT host_names.clli FROM host_names " 
+             "INNER JOIN wire_centers ON wire_centers.abbr = host_names.location " 
+             f"WHERE host_names.type = '{network_element}' AND wire_centers.name = '{wire_center}'"
+             "ORDER BY host_names.clli")
 
     host_names_list = retrieve_records(query)
 
     return render_template('host_names.html',
                            network_element=network_element, wire_center=wire_center, host_names=host_names_list)
+
+
+@app.route('/search', methods=['POST'])
+def search():
+    search_string = request.form['search_bottom']
+    query = f"SELECT clli FROM host_names WHERE clli LIKE '%{search_string}%'"
+    host_names_list = retrieve_records(query)
+
+    return render_template('host_names.html',
+                            network_element=search_string, wire_center=search_string,
+                            host_names=host_names_list)
+
+
+@app.route('/search_top', methods=['POST'])
+def search_top():
+    search_string = request.form['search_top']
+    query = f"SELECT clli FROM host_names WHERE clli LIKE '%{search_string}%'"
+    host_names_list = retrieve_records(query)
+
+    return render_template('host_names.html',
+                            network_element=search_string, wire_center=search_string,
+                            host_names=host_names_list)
 
 
 @app.route('/device_connection/<network_element>/<wire_center>/<clli>')

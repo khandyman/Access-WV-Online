@@ -14,6 +14,22 @@
     </style>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav me-auto">
+          <li><a class="nav-item nav-link px-3 active" href="{{ url_for('home') }}">Home</a></li>
+          <li><a class="nav-item nav-link px-3 active" href="#">Network Elements<span class="sr-only">(current)</span></a></li>
+          <li><a class="nav-item nav-link px-3 active" href="{{ url_for('wire_centers', network_element='none') }}">Wire Centers</a></li>
+          <li><form class="d-flex nav-item px-3" action="/search_top" method="post">
+            <input class="form-control me-2" type="text" id="search_top" name="search_top">
+            <button class="btn btn-light" type="submit">Search</button>
+          </form></li>
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li><a class="nav-item nav-link px-3 active" href="{{url_for('log_in')}}">Log Out</a></li>
+        </ul>
+      </div>
+    </nav>
     <div class="container, mx-auto p-2, text-center", style=width:800px>
       <p>
         <img class="img-fluid" src="{{ url_for('static', filename='logo.PNG') }}" height="200">
