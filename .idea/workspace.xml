@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7854d071-55a8-4932-88d0-6ca910199f5f" name="Changes" comment="integrated pyxtermjs into app">
+    <list default="true" id="7854d071-55a8-4932-88d0-6ca910199f5f" name="Changes" comment="fixed search functionality; added navbars to all pages">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/connect.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/connect.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/device_connection.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/device_connection.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/host_names.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/host_names.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/log_in.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/log_in.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/network_elements.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/network_elements.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/wire_centers.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/wire_centers.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,11 +88,20 @@
       <option name="project" value="LOCAL" />
       <updated>1732421642002</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fixed search functionality; added navbars to all pages">
+      <option name="closed" value="true" />
+      <created>1732486125178</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1732486125178</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="integrated pyxtermjs into app" />
-    <option name="LAST_COMMIT_MESSAGE" value="integrated pyxtermjs into app" />
+    <MESSAGE value="fixed search functionality; added navbars to all pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed search functionality; added navbars to all pages" />
   </component>
 </project>

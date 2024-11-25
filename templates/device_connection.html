@@ -140,6 +140,8 @@
           return true;
         }
 
+        window.onPopState = sendBreak();
+
         const wait_ms = 50;
         window.onresize = debounce(fitToscreen, wait_ms);
 
@@ -148,11 +150,25 @@
         var conn = "telnet " + ip + " " + port + "\r";
         console.log("conn is: " + conn);
         socket.emit("pty-input", { input: conn });
+
+        function sendBreak() {
+          socket.emit("pty-input", { input: '\x03' });
+        }
       </script>
 
-      <div class="p-3">
-        <a class="pt-2 d-grid gap-2 col-6 mx-auto btn btn-danger"
-           href="{{ url_for('host_names', network_element=network_element, wire_center=wire_center) }}">Back</a>
+      {% if network_element != wire_center %}
+        {% set action_string = "{{ url_for('host_names', network_element=network_element, wire_center=wire_center) }}" %}
+      {% else %}
+        {% set action_string = "{{ url_for('home') }}"%}
+      {% endif %}
+
+      {{ network_element }}
+      {{ wire_center }}
+
+      <form action="{{ action_string }}" method="post">
+        <button class="mt-4 d-grid gap-2 col-6 mx-auto btn btn-danger" onClick="sendBreak()" type="submit">Back</button>
+      </form>
+
       </div>
     </div>
   </body>

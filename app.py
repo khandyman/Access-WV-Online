@@ -50,7 +50,7 @@ def log_in():
     return render_template("log_in.html")
 
 
-@app.route('/home')
+@app.route('/home', methods=['GET', 'POST'])
 def home():
     return render_template('home.html')
 
@@ -86,7 +86,7 @@ def wire_centers(network_element):
                            network_element=network_element, wire_centers=wire_center_list)
 
 
-@app.route('/host_names/<network_element>/<wire_center>')
+@app.route('/host_names/<network_element>/<wire_center>', methods=['GET', 'POST'])
 def host_names(network_element, wire_center):
     query = (f"SELECT host_names.clli FROM host_names " 
              "INNER JOIN wire_centers ON wire_centers.abbr = host_names.location " 
@@ -129,6 +129,12 @@ def device_connection(network_element, wire_center, clli):
     return render_template('device_connection.html',
                            network_element=network_element, wire_center=wire_center,
                            ip=connect_list[0]['ip'], port=connect_list[0]['port'])
+
+
+@app.route('/back')
+def back():
+    return render_template('host_names.html',
+                           network_element='none', wire_center='none', host_names='none')
 
 
 @app.route("/<ip>/<port>")
