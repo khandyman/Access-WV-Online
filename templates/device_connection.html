@@ -27,7 +27,7 @@
         </ul>
       </div>
     </nav>
-    <div class="container, mx-auto p-2, text-center", style=width:800px>
+    <div class="container mx-auto p-2 text-center" style=width:800px>
       <p>
         <img class="img-fluid" src="{{ url_for('static', filename='logo.PNG') }}">
       </p>
@@ -35,7 +35,7 @@
       <br><br>
 
       <span style="font-size: small"
-      >status:
+      >web socket status:
       <span style="font-size: small" id="status">connecting...</span></span>
 
       <div style="width: 100%; height: calc(100% - 50px)" id="terminal"></div>
@@ -151,25 +151,17 @@
         console.log("conn is: " + conn);
         socket.emit("pty-input", { input: conn });
 
+        function programmedBack() {
+          sendBreak();
+          history.back();
+        }
+
         function sendBreak() {
           socket.emit("pty-input", { input: '\x03' });
         }
       </script>
 
-      {% if network_element != wire_center %}
-        {% set action_string = "{{ url_for('host_names', network_element=network_element, wire_center=wire_center) }}" %}
-      {% else %}
-        {% set action_string = "{{ url_for('home') }}"%}
-      {% endif %}
-
-      {{ network_element }}
-      {{ wire_center }}
-
-      <form action="{{ action_string }}" method="post">
-        <button class="mt-4 d-grid gap-2 col-6 mx-auto btn btn-danger" onClick="sendBreak()" type="submit">Back</button>
-      </form>
-
-      </div>
+      <button class="mt-4 d-grid gap-2 col-6 mx-auto btn btn-danger" onClick="programmedBack()" type="submit">Back</button>
     </div>
   </body>
 </html>

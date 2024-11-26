@@ -1,3 +1,4 @@
+from werkzeug.security import generate_password_hash
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 from os import environ
@@ -24,3 +25,16 @@ def retrieve_records(sql_string):
             records_list.append(row_to_dict)
 
     return records_list
+
+def insert_user(usr, pwd):
+    pwd = str(generate_password_hash(pwd))
+
+    query = f"INSERT INTO users (user_name, user_password) values ('{usr}', '{pwd}')"
+
+    with engine.connect() as conn:
+        result = conn.execute(text(query))
+
+    return result
+
+
+print(insert_user('tsw581', 'my_secret_password'))

@@ -6,6 +6,7 @@ from flask_socketio import SocketIO
 import pty
 import os
 import subprocess
+import socket
 import select
 import termios
 import struct
@@ -204,11 +205,20 @@ def main():
     parser.add_argument(
         "-p", "--port", default=5000, help="port to run server on", type=int
     )
+
+    host_name = socket.gethostname()
+
+    if 'awv' in host_name or 'accesswv' in host_name:
+        host_ip = "0.0.0.0"
+    else:
+        host_ip = "127.0.0.1"
+
     parser.add_argument(
         "--host",
-        default="127.0.0.1",
+        default=host_ip,
         help="host to run server on (use 0.0.0.0 to allow access from other hosts)",
     )
+
     parser.add_argument("--debug", action="store_true", help="debug the server")
     parser.add_argument("--version", action="store_true", help="print version and exit")
     parser.add_argument(
